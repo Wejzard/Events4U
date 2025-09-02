@@ -8,53 +8,68 @@
     
         <div class="card shadow-sm">
             <div class="card-body">
-                <form action="submit-event.php" method="POST" enctype="multipart/form-data">
+                <form id= "eventForm" action="#" method="POST" enctype="multipart/form-data">
                     
                     <!-- Event Title -->
                     <div class="mb-3">
-                        <label for="eventTitle" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" id="eventTitle" name="eventTitle" required>
+                        <label for="title" class="form-label">Event Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div>
     
                     <!-- Description -->
                     <div class="mb-3">
-                        <label for="eventDescription" class="form-label">Event Description</label>
-                        <textarea class="form-control" id="eventDescription" name="eventDescription" rows="4" required></textarea>
+                        <label for="description" class="form-label">Event Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
                     </div>
+                      <!-- Category -->
+                    <div class="mb-3">
+                      <label for="category" class="form-label">Category</label>
+                         <select class="form-control" id="category" name="category" required>
+                             <option value="POP">Pop</option>
+                             <option value="ROCK">Rock</option>
+                             <option value="CLASSICAL">Opera</option>
+                              <option value="SPORT">Theatre</option>
+                               <option value="SPORT">Paintings</option>
+                                <option value="SPORT">Sculpturing</option>
+                                 <option value="SPORT">Football</option>
+                                  <option value="SPORT">Basketball</option>
+                                   <option value="SPORT">Baseball</option>
+                     </select>
+                      </div>
     
                     <!-- Date & Time -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="eventDate" class="form-label">Event Date</label>
-                            <input type="date" class="form-control" id="eventDate" name="eventDate" required>
+                            <label for="event_date" class="form-label">Event Date</label>
+                            <input type="date" class="form-control" id="event_date" name="event_date" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="eventTime" class="form-label">Event Time</label>
-                            <input type="time" class="form-control" id="eventTime" name="eventTime" required>
+                            <label for="event_time" class="form-label">Event Time</label>
+                            <input type="time" class="form-control" id="event_time" name="event_time" required>
                         </div>
                     </div>
     
                     <!-- Location -->
                     <div class="mb-3">
-                        <label for="eventLocation" class="form-label">Event Location</label>
-                        <input type="text" class="form-control" id="eventLocation" name="eventLocation" required>
+                        <label for="location" class="form-label">Event Location</label>
+                        <input type="text" class="form-control" id="location" name="location" required>
                     </div>
     
                     <!-- Ticket Price -->
                     <div class="mb-3">
-                        <label for="ticketPrice" class="form-label">Ticket Price ($)</label>
-                        <input type="number" class="form-control" id="ticketPrice" name="ticketPrice" step="0.01" required>
+                        <label for="price" class="form-label">Ticket Price ($)</label>
+                        <input type="number" class="form-control" id="price" name="price" step="0.01" required>
                     </div>
     
                     <!-- Upload Event Image -->
                     <div class="mb-3">
-                        <label for="eventImage" class="form-label">Upload Event Image</label>
-                        <input type="file" class="form-control" id="eventImage" name="eventImage" accept="image/*" required>
+                        <label for="image" class="form-label">Upload Event Image</label>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
                     </div>
     
                     <!-- Submit Button -->
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Submit Event</button>
+                        <button id="submitEventBtn" type="submit" class="btn btn-primary">Submit Event</button>
                     </div>
     
                 </form>

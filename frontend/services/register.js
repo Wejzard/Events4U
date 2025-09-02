@@ -12,7 +12,7 @@ $(document).ready(function () {
     
     RestClient.post("/auth/register", data, function () {
       toastr.success("Registration successful!");
-      window.location.href = "/ticket/#login";
+      window.location.href = "../views/login.html";
     }, function (error) {
       toastr.error(error.responseJSON?.message || "Registration failed.");
     });

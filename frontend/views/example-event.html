@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Event Detail">
+  <meta name="author" content="">
+
+  <title>EVENTS4U - Event Detail</title>
+
+  <!-- Custom fonts -->
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles -->
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+
+  <style>
+    .event-cover {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      border-radius: .5rem;
+    }
+
+    .ticket-counter input {
+      max-width: 90px;
+    }
+
+    .pill {
+      font-size: .8rem;
+      border-radius: 999px;
+      padding: .35rem .75rem;
+    }
+  </style>
+</head>
+
+<body class="bg-light">
+
+  <div class="container py-5">
+
+    <!-- Page heading -->
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 text-gray-800 mb-0">Event Details</h1>
+      <a href="#main" class="btn btn-sm btn-secondary">
+        <i class="fas fa-arrow-left mr-1"></i> Back to Events
+      </a>
+    </div>
+
+    <!-- Card -->
+    <div class="card shadow-lg border-0 overflow-hidden">
+      <div class="row no-gutters">
+        <!-- Cover image -->
+        <div class="col-md-5">
+          <img src="../assets/img/hiking2.jpg" alt="Hiking Adventure" class="event-cover img-fluid">
+        </div>
+
+        <!-- Details -->
+        <div class="col-md-7">
+          <div class="card-body">
+            <div class="mb-2">
+              <span class="badge badge-primary pill mr-2"><i class="fas fa-mountain mr-1"></i> Outdoor</span>
+              <span class="badge badge-info pill"><i class="fas fa-walking mr-1"></i> Hiking</span>
+            </div>
+
+            <h2 class="h4 card-title mb-2">Hiking Adventure</h2>
+            <p class="text-muted mb-3">
+              Join us for an exciting hiking adventure through breathtaking landscapes—perfect for nature lovers and
+              adventure seekers.
+            </p>
+
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item">
+                <i class="far fa-calendar-alt text-primary mr-2"></i>
+                <strong>Date &amp; Time:</strong> April 15, 2025 · 10:00 AM
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-map-marker-alt text-danger mr-2"></i>
+                <strong>Location:</strong> Rocky Mountains National Park
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-ticket-alt text-success mr-2"></i>
+                <strong>Price:</strong> $50 per person
+              </li>
+            </ul>
+
+            <!-- Quantity + actions -->
+            <div class="d-flex flex-wrap align-items-center mb-3">
+              <div class="ticket-counter d-flex align-items-center mr-3 mb-3 mb-md-0">
+                <button class="btn btn-outline-secondary btn-sm" onclick="decreaseQuantity()">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <input type="number" id="ticketQuantity" class="form-control text-center mx-2"
+                       value="1" min="1" step="1">
+                <button class="btn btn-outline-secondary btn-sm" onclick="increaseQuantity()">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <a href="#credit-card" class="btn btn-success mr-2 mb-2">
+                <i class="far fa-calendar-check mr-1"></i> Make a Reservation
+              </a>
+              <a href="#credit-card" class="btn btn-primary mb-2">
+                <i class="fas fa-credit-card mr-1"></i> Buy Ticket
+              </a>
+            </div>
+
+            <!-- Extras -->
+            <div class="text-muted small">
+              <i class="far fa-clock mr-1"></i> Duration: ~4–5 hours
+              <span class="mx-2">•</span>
+              <i class="fas fa-signal mr-1"></i> Difficulty: Moderate
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts -->
+  <script src="../js/sb-admin-2.min.js"></script>
+
+  <script>
+    function increaseQuantity() {
+      const input = document.getElementById('ticketQuantity');
+      input.value = Math.max(1, parseInt(input.value) + 1);
+    }
+    function decreaseQuantity() {
+      const input = document.getElementById('ticketQuantity');
+      input.value = Math.max(1, parseInt(input.value) - 1);
+    }
+  </script>
+
+</body>
+</html>

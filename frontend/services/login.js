@@ -12,7 +12,7 @@ $(document).ready(function () {
       if (token) {
         localStorage.setItem("user_token", token);
         toastr.success("Login successful!");
-        window.location.href = "/ticket/#main";
+        window.location.href = "/HajrudinVejzovic/WebProject/index.html";
       } else {
         toastr.error("No token returned");
       }

@@ -1,14 +1,17 @@
 
                 <!-- Begin Page Content -->
 <div class="container-fluid">
-<h1 class="h3 mb-4 text-gray-800">All Events</h1>
-<table class="table table-striped" id="events-table"></table>
+<div id="events-container" class="row row-cols-1 row-cols-md-3 g-4"></div>
+<nav>
+  <ul class="pagination justify-content-center" id="pagination"></ul>
+</nav>
 
-<!-- Load utils first -->
-<script src="frontend/utils/constants.js"></script>
-<script src="frontend/utils/rest-client.js"></script>
-<!-- Then load services -->
-<script src="frontend/services/events-service.js"></script>
+
+
+
+
+
+
 
 <!-- Then call the EventService -->
 <script>
@@ -16,7 +19,7 @@
     if (typeof EventService !== "undefined") {
       EventService.loadAll();
     } else {
-      console.error("❌ EventService not loaded. Check script include.");
+      console.error("ERROR! EventService not loaded. Check script include.");
     }
   });
 </script>

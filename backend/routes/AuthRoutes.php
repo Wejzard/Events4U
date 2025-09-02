@@ -31,6 +31,7 @@ Flight::group('/auth', function() {
 Flight::route('POST /register', function () {
     try {
         $data = Flight::request()->data->getData();
+        
         $service = new UsersService();
 
         Flight::json([

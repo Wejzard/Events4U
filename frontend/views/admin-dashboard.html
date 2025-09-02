@@ -13,7 +13,7 @@
 
   <hr>
 
-<body>
+<body id="bodyTag" style="display: none;">
   <div class="container mt-4">
     <h2 class="text-center mb-4">Admin Dashboard</h2>
 
@@ -162,6 +162,29 @@
   <script src="../utils/rest-client.js"></script>
   <script src="../utils/utils.js"></script>
   <script src="../services/admin-dashboard.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script>
+  // Load token and decode it
+  const token = localStorage.getItem("user_token");
+  const decoded = Utils.parseJwt(token);
+
+  // Conditions that kick user out
+  if (
+    !token ||                        // no token at all
+    !decoded ||                     // can't decode
+    !decoded.user ||                // no user data
+    decoded.user.role !== "admin" || // not an admin
+    (decoded.exp && Date.now() >= decoded.exp * 1000) // token expired
+  ) {
+    // Clear token and redirect to login
+    localStorage.removeItem("user_token");
+    toastr.error("Access denied. Admins only.");
+    window.location.href = "../views/login.html"; // or your SPApp route if needed
+  } else {
+     //admin is verified
+     document.getElementById("bodyTag").style.display ="block";
+  }
+</script>
 </body>
 
 </html>

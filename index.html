@@ -184,7 +184,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span id ="userNameDisplay" class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
                                 src="frontend/assets/img/undraw_profile.svg">
                             </a>
@@ -228,9 +228,8 @@
        <section id="credit-card" data-load = "credit-card.html">   </section>  
        <section id="event" data-load = "event.html">   </section>  
        <section id="profile" data-load = "profile.html">  </section>  
-       <section id="settings" data-load = "settings.html">   </section>
-      <section id="login" data-load = "login.html">   </section>  
-       <section id="register" data-load = "register.html">   </section>  
+       <section id="settings" data-load = "settings.html">   </section>  
+ <!--      <section id="register" data-load = "register.html">   </section>  -->
 
        
         <!--  </div>   -->
@@ -241,7 +240,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2025</span>
+                        <span>Copyright &copy; E V E N T S 4 U 2025</span>
                     </div>
                 </div>
             </footer>
@@ -272,7 +271,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="#login">Logout</a>
+                    <a class="btn btn-primary" href="frontend/views/login.html">Logout</a>
                 </div>
             </div>
         </div>
@@ -300,6 +299,25 @@
 <!-- Dupli load jquerya-->
 <!-- <script src="frontend/js/jquery.min.js"></script> -->
  <script src="frontend/utils/utils.js"></script>
+
+
+<!--IMPORTS SCRIPTS FROM MAIN-->
+
+<!-- Load utils first -->
+<script src="frontend/utils/constants.js"></script>
+<script src="frontend/services/post-event.js" ></script>
+<script src="frontend/utils/rest-client.js"></script>
+<!-- Then load services -->
+<script src="frontend/services/events-service.js"></script>
+
+<!----TILL HERE   -->
+
+
+<script src = "frontend/utils/user-profile-name.js" ></script>
+
+<script src="frontend/services/logout.js"></script>
+
+
 <script>
     
     var app = $.spapp({
@@ -309,12 +327,23 @@
     });
     
     app.run();
-    
+    // Protect routes on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("user_token");
+  const decoded = Utils.parseJwt(token);
+
+  // If token is missing, expired, or invalid — redirect to login
+  if (
+    !token ||
+    !decoded ||
+    !decoded.user ||
+    (decoded.exp && Date.now() >= decoded.exp * 1000)
+  ) {
+    localStorage.removeItem("user_token");
+    window.location.href = "frontend/views/login.html"; // or index.html#login
+  }
+});
 </script>
-
-
-
-
 </body>
 
 </html>
