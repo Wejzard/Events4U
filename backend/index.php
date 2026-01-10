@@ -23,7 +23,7 @@ Flight::register('payment_service', 'PaymentsService');
 Flight::register('order_service', 'OrdersService');
 Flight::register('auth_middleware', 'AuthMiddleware'); 
 
-error_log('Requested URL: ' . Flight::request()->url);
+//error_log('Requested URL: ' . Flight::request()->url);
 
 
 Flight::route('/*', function () {
@@ -37,7 +37,8 @@ Flight::route('/*', function () {
             $token = Flight::request()->getHeader("Authentication");
             return Flight::auth_middleware()->verifyToken($token);
         } catch (\Exception $e) {
-            Flight::halt(401, $e->getMessage());
+            Flight::halt(401, json_encode(["message" => $e->getMessage()]));
+
         }
     }
 });

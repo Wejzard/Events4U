@@ -17,6 +17,8 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+     <link rel="stylesheet" href="frontend/css/events.css">
 
     <!-- Custom styles for this template-->
     <link href="frontend/css/sb-admin-2.min.css" rel="stylesheet">
@@ -77,28 +79,30 @@
                 <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
+                          <h6 class="collapse-header">All:</h6>
+                    <a class="collapse-item" href="#main" onclick="EventService.loadAll('ALL', 1)">All events</a>
+                <div class="collapse-divider"></div>
                         
                         <h6 class="collapse-header">Music Genres:</h6>
-                       <a class="collapse-item" href="#main" onclick="EventService.loadAll('POP')">POP</a>
-                        <a class="collapse-item" href="#main" onclick="EventService.loadAll('Rock')">Rock</a>
-                        <a class="collapse-item" href="#main" onclick="EventService.loadAll('Opera')">Opera</a>
+                       <a class="collapse-item" href="#main" onclick="EventService.loadAll('POP', 1)">POP</a>
+                        <a class="collapse-item" href="#main" onclick="EventService.loadAll('Rock', 1)">Rock</a>
+                        <a class="collapse-item" href="#main" onclick="EventService.loadAll('Opera', 1)">Opera</a>
                         
 
                         <div class="collapse-divider"></div>
 
                         <h6 class="collapse-header">Art Categories:</h6>
-                    <a class="collapse-item" href="#main" onclick="EventService.loadAll('Theatre')">Theatre</a>
-                    <a class="collapse-item" href="#main" onclick="EventService.loadAll('Paintings')">Paintings</a>
-                    <a class="collapse-item" href="#main" onclick="EventService.loadAll('Sculpturing')">Sculpturing</a>
+                    <a class="collapse-item" href="#main" onclick="EventService.loadAll('Theatre', 1)">Theatre</a>
+                    <a class="collapse-item" href="#main" onclick="EventService.loadAll('Paintings' , 1)">Paintings</a>
+                    <a class="collapse-item" href="#main" onclick="EventService.loadAll('Sculpturing' , 1)">Sculpturing</a>
 
 
                         <div class="collapse-divider"></div>
 
                          <h6 class="collapse-header">Sports:</h6>
-                      <a class="collapse-item" href="#main" onclick="EventService.loadAll('Football')">Football</a>
-                      <a class="collapse-item" href="#main" onclick="EventService.loadAll('Basketball')">Basketball</a>
-                      <a class="collapse-item" href="#main" onclick="EventService.loadAll('Baseball')">Baseball</a>
+                      <a class="collapse-item" href="#main" onclick="EventService.loadAll('Football' , 1)">Football</a>
+                      <a class="collapse-item" href="#main" onclick="EventService.loadAll('Basketball' , 1)">Basketball</a>
+                      <a class="collapse-item" href="#main" onclick="EventService.loadAll('Baseball' , 1)">Baseball</a>
                         <div class="collapse-divider"></div>
 
                        
@@ -149,18 +153,21 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <form id="eventSearchForm"
+  class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+  <div class="input-group">
+    <input id="eventSearchInput" type="text"
+      class="form-control bg-light border-0 small"
+      placeholder="Search events..."
+      aria-label="Search" aria-describedby="basic-addon2">
+
+    <div class="input-group-append">
+      <button id="eventSearchBtn" class="btn btn-primary" type="submit">
+        <i class="fas fa-search fa-sm"></i>
+      </button>
+    </div>
+  </div>
+</form>
                     <!-- Admin Button (Only for Admins) -->
 <div id="adminTopbarButton" class="ml-3 d-none">
   <a href="frontend/views/admin-dashboard.html" class="btn btn-danger btn-sm">
@@ -271,7 +278,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="frontend/views/login.html">Logout</a>
+                    <a class="btn btn-primary logout-link" href="#">Logout</a>
                 </div>
             </div>
         </div>
@@ -281,6 +288,7 @@
 <script src="frontend/js/jquery.min.js"></script>
 <script src="frontend/js/jquery.spapp.min.js"></script>
 <script src="frontend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="frontend/services/ticket-quantity.js"></script>
 
 <!-- jQuery -->
  <script src="frontend/vendor/datatables/jquery.dataTables.min.js"></script> 
@@ -307,16 +315,25 @@
 <script src="frontend/utils/constants.js"></script>
 <script src="frontend/services/post-event.js" ></script>
 <script src="frontend/utils/rest-client.js"></script>
-<!-- Then load services -->
+<script src="frontend/services/orders-service.js"></script>
+
 <script src="frontend/services/events-service.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+ <script src="frontend/services/event-details.js"></script>       
+ <script src="frontend/services/ticket-quantity.js"></script>
+ <script src="frontend/services/search.js"></script>
+<!-- Then load services -->
+
 
 <!----TILL HERE   -->
 
 
 <script src = "frontend/utils/user-profile-name.js" ></script>
+<script src="frontend/services/events-owner-stats.js"></script>
 
 <script src="frontend/services/logout.js"></script>
-
+<script src="frontend/utils/auth-guard.js"></script>
 
 <script>
     
@@ -327,22 +344,7 @@
     });
     
     app.run();
-    // Protect routes on page load
-document.addEventListener("DOMContentLoaded", () => {
-  const token = localStorage.getItem("user_token");
-  const decoded = Utils.parseJwt(token);
 
-  // If token is missing, expired, or invalid — redirect to login
-  if (
-    !token ||
-    !decoded ||
-    !decoded.user ||
-    (decoded.exp && Date.now() >= decoded.exp * 1000)
-  ) {
-    localStorage.removeItem("user_token");
-    window.location.href = "frontend/views/login.html"; // or index.html#login
-  }
-});
 </script>
 </body>
 

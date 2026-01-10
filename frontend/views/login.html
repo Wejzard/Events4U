@@ -19,6 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 
 </head>
 <body class="bg-gradient-primary">
@@ -94,20 +96,12 @@
     <script src="../utils/constants.js"></script>
     <script src="../utils/rest-client.js"></script>
     <script src="../utils/utils.js"></script>
+
     <!-- Toastr JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <!--  <script src="../services/user-service.js"></script> -->
     <script src="../services/login.js"></script>
 
-
-<script>
-  $(document).ready(function () {
-    $("#loginForm").submit(function (e) {
-      e.preventDefault();
-      UserService.login();
-    });
-  });
-</script>
 
 </body>
 

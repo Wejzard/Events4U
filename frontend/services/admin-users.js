@@ -1,3 +1,4 @@
+/*
 $(document).ready(function () {
   restClient.get("/users", function (users) {
     let tableBody = $("#users-table-body");
@@ -31,3 +32,4 @@ $(document).on("click", ".delete-user", function () {
 });
 
 // Edit — can be wired to open modal with user info
+*/

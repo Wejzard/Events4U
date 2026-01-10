@@ -1,62 +1,127 @@
-
-                <!-- Begin Page Content -->
 <div class="container-fluid">
+  <div class="container mt-4">
 
-    <div class="container mt-4">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-lg">
-                    <div class="card-header bg-danger text-white text-center">
-                        <h4>Reset Your Password</h4>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <!-- Email Input -->
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                            </div>
-    
-                            <!-- New Password -->
-                            <div class="form-group">
-                                <label for="new-password">New Password</label>
-                                <input type="password" class="form-control" id="new-password" placeholder="Enter new password" required>
-                            </div>
-    
-                            <!-- Confirm Password -->
-                            <div class="form-group">
-                                <label for="confirm-password">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm new password" required>
-                            </div>
-    
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-danger btn-block">Reset Password</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <!-- Reset Password -->
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg">
+          <div class="card-header bg-danger text-white text-center">
+            <h4>Reset Your Password</h4>
+          </div>
+          <div class="card-body">
+            <form id="resetPasswordForm">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+              </div>
+
+              <div class="form-group">
+                <label for="new-password">New Password</label>
+                <input type="password" class="form-control" id="new-password" placeholder="Enter new password" required>
+              </div>
+
+              <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm new password" required>
+              </div>
+
+              <button type="submit" class="btn btn-danger btn-block">Reset Password</button>
+            </form>
+          </div>
         </div>
-    </div> 
-    
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-     
+
+    <!-- My Purchases & Reservations -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-lg-10">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">My Purchases & Reservations</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Event</th>
+                    <th>Category</th>
+                    <th>Date & Time</th>
+                    <th>Qty</th>
+                    <th>Type</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="myOrdersTbody">
+                  <tr>
+                    <td colspan="8" class="text-center text-muted">Open Settings to load your orders...</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+            <small class="text-muted">Reservations appear as pending, purchases as paid.</small>
+          </div>
         </div>
+      </div>
     </div>
-        
 
+    <!-- My Event Sales (owner stats) -->
+    <div class="row justify-content-center mt-4">
+      <div class="col-lg-10">
+        <div class="card shadow-sm">
+          <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">My Event Sales</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Event</th>
+                    <th>Category</th>
+                    <th>Date & Time</th>
+                    <th>Ticket Limit</th>
+                    <th>Sold Qty</th>
+                    <th>Reserved Qty</th>
+                    <th>Remaining</th>
+                  </tr>
+                </thead>
+                <tbody id="mySalesTbody">
+                  <tr>
+                    <td colspan="7" class="text-center text-muted">Sales stats will load here...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <small class="text-muted">Sold vs reserved totals for events you posted.</small>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  
-
+  </div>
 </div>
-<!-- /.container-fluid -->
 
-            </div>
-            <!-- End of Main Content -->
-
- 
+<!-- Cancel Reservation Modal (needed for Cancel button) -->
+<div class="modal fade" id="cancelReservationModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cancel reservation?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This will cancel your reservation.
+        <input type="hidden" id="cancelOrderId" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger" id="confirmCancelReservationBtn">Yes, cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

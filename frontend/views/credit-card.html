@@ -1,66 +1,50 @@
-
-
-                <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <div class="container mt-5">
-        <h1 class="h3 mb-4 text-gray-800 text-center">Post Your Event</h1>
-    
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <div class="container mt-4">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="card shadow-lg">
-                                <div class="card-header bg-primary text-white text-center">
-                                    <h4>Secure Payment</h4>
-                                </div>
-                                <div class="card-body">
-                                    <form>
-                                        <!-- Cardholder Name -->
-                                        <div class="form-group">
-                                            <label for="cardholder-name">Cardholder Name</label>
-                                            <input type="text" class="form-control" id="cardholder-name" placeholder="Enter full name" required>
-                                        </div>
-                
-                                        <!-- Card Number -->
-                                        <div class="form-group">
-                                            <label for="card-number">Card Number</label>
-                                            <input type="text" class="form-control" id="card-number" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
-                                        </div>
-                
-                                        <!-- Expiration & CVV -->
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="expiry-date">Expiration Date</label>
-                                                <input type="text" class="form-control" id="expiry-date" placeholder="MM/YY" maxlength="5" required>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="cvv">CVV</label>
-                                                <input type="text" class="form-control" id="cvv" placeholder="XXX" maxlength="4" required>
-                                            </div>
-                                        </div>
-                
-                                        <!-- Submit Button -->
-                                        <button type="submit" class="btn btn-success btn-block">Pay Now</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+  <div class="container mt-5">
+    <h1 class="h3 mb-4 text-gray-800 text-center">Payment</h1>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="container mt-4">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                  <h4>Secure Payment</h4>
+                </div>
+                <div class="card-body">
+                  <form id="paymentForm">
+                    <div class="form-group">
+                      <label for="cardholder-name">Cardholder Name</label>
+                      <input type="text" class="form-control" id="cardholder-name" placeholder="Enter full name" required>
                     </div>
-                </div> ---
+
+                    <div class="form-group">
+                      <label for="card-number">Card Number</label>
+                      <input type="text" class="form-control" id="card-number" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="expiry-date">Expiration Date</label>
+                        <input type="text" class="form-control" id="expiry-date" placeholder="MM/YY" maxlength="5" required>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="cvv">CVV</label>
+                        <input type="text" class="form-control" id="cvv" placeholder="XXX" maxlength="4" required>
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-block">Pay Now</button>
+                  </form>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+
+      </div>
     </div>
-        
-
-
-  
+  </div>
 
 </div>
-<!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
-         

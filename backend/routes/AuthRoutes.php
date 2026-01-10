@@ -29,18 +29,17 @@ Flight::group('/auth', function() {
  * )
  */
 Flight::route('POST /register', function () {
-    try {
-        $data = Flight::request()->data->getData();
-        
-        $service = new UsersService();
+  $data = Flight::request()->data->getData();
+  $response = Flight::auth_service()->register($data);
 
-        Flight::json([
-            'message' => 'User registered successfully',
-            'data' => $service->register($data)
-        ]);
-    } catch (Exception $e) {
-        Flight::halt(500, "Exception: " . $e->getMessage());
-    }
+  if ($response['success']) {
+    Flight::json([
+      'message' => 'User registered successfully',
+      'data' => $response['data']
+    ]);
+  } else {
+    Flight::halt(401, json_encode(['message' => $response['message']]));
+  }
 });
    
    /**
@@ -74,7 +73,7 @@ Flight::route('POST /register', function () {
                'data' => $response['data']
            ]);
        } else {
-           Flight::halt(500, $response['error']);
+         Flight::halt(401, json_encode(["message" => $response['message']]));
        }
    });
 });
@@ -120,6 +119,6 @@ Flight::route('POST /login', function () {
 
 
 
-?>
+
 
 

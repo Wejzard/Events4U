@@ -1,0 +1,104 @@
+/* =========================
+   EVENT CARDS – UNIFORM UI
+   ========================= */
+
+/* Ensure cards are equal height */
+#events-container .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Event image styling */
+#events-container .card-img-top {
+  width: 100%;
+  height: 220px;              /* fixed height for all images */
+  object-fit: cover;          /* crop image, no distortion */
+  object-position: center;
+}
+
+/* Card body layout */
+#events-container .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Event title – clamp to 2 lines */
+#events-container .card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  /* Vendor + standard */
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* Event description / location */
+#events-container .card-text {
+  font-size: 0.95rem;
+  color: #555;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* Price styling */
+#events-container .card-text strong {
+  font-size: 1.05rem;
+  color: #000;
+}
+
+/* Button spacing */
+#events-container .btn {
+  margin-top: 10px;
+}
+
+/* Pagination spacing */
+#pagination {
+  margin-top: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #events-container .card-img-top {
+    height: 180px;
+  }
+}
+
+/* ---- Toastr visibility fix (white box / white text) ---- */
+#toast-container > .toast {
+  opacity: 1 !important;
+}
+
+#toast-container > .toast,
+#toast-container > .toast * {
+  color: #fff !important;
+}
+
+#toast-container > .toast.toast-success {
+  background-color: #28a745 !important;
+}
+#toast-container > .toast.toast-error {
+  background-color: #dc3545 !important;
+}
+#toast-container > .toast.toast-warning {
+  background-color: #ffc107 !important;
+  color: #111 !important;
+}
+#toast-container > .toast.toast-warning * {
+  color: #111 !important;
+}
+#toast-container > .toast.toast-info {
+  background-color: #17a2b8 !important;
+}
+

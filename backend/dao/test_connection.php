@@ -60,4 +60,3 @@ $user = $usersDao->get_by_id($user_id);
 echo "Updated User Information:\n";
 print_r($user);
 
-?>

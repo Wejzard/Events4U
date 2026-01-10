@@ -1,89 +1,90 @@
-
-
-                <!-- Begin Page Content -->
+<!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <div class="container mt-5">
-        <h1 class="h3 mb-4 text-gray-800 text-center">Post Your Event</h1>
-    
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <form id= "eventForm" action="#" method="POST" enctype="multipart/form-data">
-                    
-                    <!-- Event Title -->
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Event Title</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
-                    </div>
-    
-                    <!-- Description -->
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Event Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
-                    </div>
-                      <!-- Category -->
-                    <div class="mb-3">
-                      <label for="category" class="form-label">Category</label>
-                         <select class="form-control" id="category" name="category" required>
-                             <option value="POP">Pop</option>
-                             <option value="ROCK">Rock</option>
-                             <option value="CLASSICAL">Opera</option>
-                              <option value="SPORT">Theatre</option>
-                               <option value="SPORT">Paintings</option>
-                                <option value="SPORT">Sculpturing</option>
-                                 <option value="SPORT">Football</option>
-                                  <option value="SPORT">Basketball</option>
-                                   <option value="SPORT">Baseball</option>
-                     </select>
-                      </div>
-    
-                    <!-- Date & Time -->
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="event_date" class="form-label">Event Date</label>
-                            <input type="date" class="form-control" id="event_date" name="event_date" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="event_time" class="form-label">Event Time</label>
-                            <input type="time" class="form-control" id="event_time" name="event_time" required>
-                        </div>
-                    </div>
-    
-                    <!-- Location -->
-                    <div class="mb-3">
-                        <label for="location" class="form-label">Event Location</label>
-                        <input type="text" class="form-control" id="location" name="location" required>
-                    </div>
-    
-                    <!-- Ticket Price -->
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Ticket Price ($)</label>
-                        <input type="number" class="form-control" id="price" name="price" step="0.01" required>
-                    </div>
-    
-                    <!-- Upload Event Image -->
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Upload Event Image</label>
-                        <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
-                    </div>
-    
-                    <!-- Submit Button -->
-                    <div class="text-center">
-                        <button id="submitEventBtn" type="submit" class="btn btn-primary">Submit Event</button>
-                    </div>
-    
-                </form>
+  <div class="container mt-5">
+    <h1 class="h3 mb-4 text-gray-800 text-center">Post Your Event</h1>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <form id="eventForm" action="#" method="POST" enctype="multipart/form-data">
+
+          <!-- Event Title -->
+          <div class="mb-3">
+            <label for="title" class="form-label">Event Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label for="description" class="form-label">Event Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+          </div>
+
+          <!-- Category -->
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-control" id="category" name="category" required>
+              <option value="POP">POP</option>
+              <option value="Rock">Rock</option>
+              <option value="Opera">Opera</option>
+
+              <option value="Theatre">Theatre</option>
+              <option value="Paintings">Paintings</option>
+              <option value="Sculpturing">Sculpturing</option>
+
+              <option value="Football">Football</option>
+              <option value="Basketball">Basketball</option>
+              <option value="Baseball">Baseball</option>
+            </select>
+          </div>
+
+          <!-- ✅ Tickets available -->
+          <div class="mb-3">
+            <label for="ticket_limit" class="form-label">Tickets available (0 = unlimited)</label>
+            <input type="number" class="form-control" id="ticket_limit" name="ticket_limit" min="0" value="0" required>
+          </div>
+
+          <!-- Date & Time -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="event_date" class="form-label">Event Date</label>
+              <input type="date" class="form-control" id="event_date" name="event_date" required>
             </div>
-        </div>
+            <div class="col-md-6 mb-3">
+              <label for="event_time" class="form-label">Event Time</label>
+              <input type="time" class="form-control" id="event_time" name="event_time" required>
+            </div>
+          </div>
+
+          <!-- Location -->
+          <div class="mb-3">
+            <label for="location" class="form-label">Event Location</label>
+            <input type="text" class="form-control" id="location" name="location" required>
+          </div>
+
+          <!-- Ticket Price -->
+          <div class="mb-3">
+            <label for="price" class="form-label">Ticket Price (KM)</label>
+            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+          </div>
+
+          <!-- Upload Event Image -->
+          <div class="mb-3">
+            <label for="image" class="form-label">Upload Event Image</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center">
+            <button id="submitEventBtn" type="submit" class="btn btn-primary">Submit Event</button>
+          </div>
+
+        </form>
+      </div>
     </div>
-        
-
-
-  
+  </div>
 
 </div>
 <!-- /.container-fluid -->
-
-            </div>
-            <!-- End of Main Content -->
-
+</div>
+<!-- End of Main Content -->

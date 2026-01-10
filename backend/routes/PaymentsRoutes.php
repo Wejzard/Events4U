@@ -166,7 +166,7 @@ Flight::route('PUT /payments/@id', function ($id) {
  * )
  */
 Flight::route('DELETE /payments/@id', function ($id) {
-    Flight::auth_middleware()->authorizeRoles(Roles::ADMIN);
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN]);
     $service = new PaymentsService();
 
     Flight::json([

@@ -9,7 +9,7 @@ class UsersService extends BaseService
     {
         parent::__construct(new UsersDao());
     }
-    
+   /* 
     public function register($data)
 {
     
@@ -83,28 +83,28 @@ public function login($data) {
         "user" => $user
     ];
 }
-
+*/
 public function change_password($data) {
     $email = trim($data['email'] ?? '');
     $newPassword = $data['new_password'] ?? '';
     $confirmPassword = $data['confirm_password'] ?? '';
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        Flight::halt(400, json_encode(["error" => "Invalid email format."]));
+        Flight::halt(400, json_encode(["message" => "Invalid email format."]));
     }
 
     if (strlen($newPassword) < 6) {
-        Flight::halt(400, json_encode(["error" => "Password must be at least 6 characters."]));
+        Flight::halt(400, json_encode(["message" => "Password must be at least 6 characters."]));
     }
 
     if ($newPassword !== $confirmPassword) {
-        Flight::halt(400, json_encode(["error" => "Passwords do not match."]));
+        Flight::halt(400, json_encode(["message" => "Passwords do not match."]));
     }
 
     $user = $this->dao->get_user_by_email($email);
 
     if (!$user) {
-        Flight::halt(404, json_encode(["error" => "User not found."]));
+        Flight::halt(404, json_encode(["message" => "User not found."]));
     }
 
     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);

@@ -1,49 +1,43 @@
-<style>#event-table tbody td {
-    width:25%;
-}</style>
+<style>
+  #event-table tbody td { width: 25%; }
+</style>
+
 <div class="container-fluid">
+  <h1 class="h3 mb-4 text-gray-800">Event Details</h1>
 
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">All Events</h1>
+  <div class="container mt-5">
+    <div class="card mx-auto" style="max-width: 600px;">
+      <img id="eventImage" src="frontend/assets/img/default.jpg" class="card-img-top img-fluid" alt="Event Image">
 
-    <!-- Responsive Table -->
-    <div class="table-responsive">
-        <div class="container mt-5">
-            <h2 class="text-center mb-4">Event Details</h2>
-        
-            <div class="card mx-auto" style="max-width: 600px;">
-                <img src="frontend/assets/img/hiking2.jpg" class="card-img-top img-fluid" alt="Event Image">
-                <div class="card-body">
-                    <h4 class="card-title">Hiking Adventure</h4>
-                    <p class="card-text">
-                        Join us for an exciting hiking adventure through breathtaking landscapes. Perfect for nature lovers and adventure seekers.
-                    </p>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong>Date & Time:</strong> April 15, 2025 - 10:00 AM</li>
-                        <li class="list-group-item"><strong>Location:</strong> Rocky Mountains National Park</li>
-                        <li class="list-group-item"><strong>Price:</strong> $50 per person</li>
-                    </ul>
-                    <div class="text-center mt-3">
-                         <!-- Ticket Counter -->
-               <div class="ticket-counter d-flex justify-content-center align-items-center mt-2">
-        <button class="btn btn-sm btn-outline-secondary" onclick="decreaseQuantity()">-</button>
-        <input type="number" id="ticketQuantity" class="form-control text-center mx-2" value="1" min="1">
-        <button class="btn btn-sm btn-outline-secondary" onclick="increaseQuantity()">+</button>
-    </div>
+      <div class="card-body">
+        <h4 id="eventTitle" class="card-title">Event title</h4>
+        <p id="eventDesc" class="card-text">Event description</p>
 
-                  <p> Quantity </p>
-                        <a href="#credit-card" class="btn btn-success me-2">Make a Reservation</a>
-                        <a href="#credit-card" class="btn btn-primary">Buy Ticket</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.table-responsive -->
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Date & Time:</strong> <span id="eventDateTime">-</span></li>
+          <li class="list-group-item"><strong>Location:</strong> <span id="eventLocation">-</span></li>
+          <li class="list-group-item"><strong>Price:</strong> <span id="eventPrice">-</span></li>
 
-  
+          <!-- ✅ availability info -->
+          <li class="list-group-item">
+            <strong>Availability:</strong> <span id="eventAvailability">-</span>
+          </li>
+        </ul>
 
+        <div class="text-center mt-3">
+          <div class="ticket-counter d-flex justify-content-center align-items-center mt-2">
+  <button type="button" id="qtyMinusBtn" class="btn btn-sm btn-outline-secondary">-</button>
+  <input type="number" id="ticketQuantity" class="form-control text-center mx-2" value="1" min="1" max="20" style="max-width: 90px;">
+  <button type="button" id="qtyPlusBtn" class="btn btn-sm btn-outline-secondary">+</button>
 </div>
-<!-- /.container-fluid -->
+<p class="mb-0 mt-1 text-center">Quantity</p>
 
-           
+
+          <!-- ✅ buttons with IDs used by orders-service.js -->
+          <button id="reserveBtn" class="btn btn-success me-2" type="button">Make a Reservation</button>
+          <a id="buyBtn" href="#credit-card" class="btn btn-primary">Buy Ticket</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
