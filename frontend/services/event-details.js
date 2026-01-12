@@ -89,7 +89,7 @@
           const dateTime = `${e.event_date || "-"} ${e.event_time || ""}`.trim();
           $("#eventDateTime").text(dateTime);
 
-          $("#eventPrice").text(`${e.price ?? "-"} KM`);
+          $("#eventPrice").text(`${e.price ?? "-"} €`);
 
           if (e.image) {
             $("#eventImage").attr("src", `frontend/assets/img/${e.image}`);

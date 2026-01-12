@@ -1,8 +1,8 @@
 <?php
 /**
 * @OA\Info(
-*     title="API",
-*     description="Restaurant API",
+*     title="Event4u API",
+*     description="Event4u backend API (FlightPHP + JWT). Public routes: /auth/login, /auth/register. All other routes require Authentication header.",
 *     version="1.0",
 *     @OA\Contact(
 *         email="web2001programming@gmail.com",
@@ -12,8 +12,8 @@
 */
 /**
 * @OA\Server(
-*     url= "http://localhost/web-programming-2025/backend",
-*     description="API server"
+*     url="http://localhost/HajrudinVejzovic/WebProject/backend",
+*     description="Local development server"
 * )
 */
 /**
@@ -21,6 +21,7 @@
 *     securityScheme="ApiKey",
 *     type="apiKey",
 *     in="header",
-*     name="Authentication"
+*     name="Authentication",
+*     description="Paste the JWT token here (no 'Bearer ' prefix unless your backend expects it)."
 * )
 */

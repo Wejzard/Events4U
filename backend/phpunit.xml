@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+  bootstrap="vendor/autoload.php"
+  colors="true"
+  failOnWarning="false"
+  failOnRisky="false"
+>
+  <testsuites>
+    <testsuite name="Backend API Tests">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+
+ <php>
+  <env name="API_BASE_URL" value="http://localhost/HajrudinVejzovic/WebProject/backend"/>
+
+  <!-- Routes -->
+  <env name="LOGIN_PATH" value="/auth/login"/>
+  <env name="ADMIN_ONLY_PATH" value="/users"/>
+  <env name="EVENTS_PATH" value="/events"/>
+
+  <!-- Test accounts -->
+  <env name="ADMIN_EMAIL" value="david.coperfield@gmail.com"/>
+  <env name="ADMIN_PASSWORD" value="11223344"/>
+
+  <env name="USER_EMAIL" value="james.bond@gmail.com"/>
+  <env name="USER_PASSWORD" value="123456"/>
+</php>
+
+</phpunit>

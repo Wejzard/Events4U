@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/../services/TicketsService.php';
-/**
+/*
  * @OA\Get(
  *     path="/tickets",
  *     summary="Get all tickets (Admin only)",
- *     security={{"JWT":{}}},
+ *     security={{"ApiKey": {}}},
  *     operationId="getAllTickets",
  *     tags={"Tickets"},
  *     @OA\Response(
@@ -28,11 +28,11 @@ Flight::route('GET /tickets', function () {
 
     Flight::json($service->fetch_all_tickets());
 });
-/**
+/*
  * @OA\Get(
  *     path="/tickets/{id}",
  *     summary="Get ticket by ID (Admin only)",
- *     security={{"JWT":{}}},
+ *     security={{"ApiKey": {}}},
  *     operationId="getTicketById",
  *     tags={"Tickets"},
  *     @OA\Parameter(
@@ -63,11 +63,11 @@ Flight::route('GET /tickets/@id', function ($id) {
 
     Flight::json($service->fetch_ticket_by_id($id));
 });
-/**
+/*
  * @OA\Post(
  *     path="/tickets",
  *     summary="Create a new ticket (Admin only)",
- *     security={{"JWT":{}}},
+ *     security={{"ApiKey": {}}},
  *     operationId="createTicket",
  *     tags={"Tickets"},
  *     @OA\RequestBody(
@@ -98,11 +98,11 @@ Flight::route('POST /tickets', function () {
         'data' => $service->create_ticket($data)
     ]);
 });
-/**
+/*
  * @OA\Put(
  *     path="/tickets/{id}",
  *     summary="Update an existing ticket by ID (Admin only)",
- *     security={{"JWT":{}}},
+ *     security={{"ApiKey": {}}},
  *     operationId="updateTicket",
  *     tags={"Tickets"},
  *     @OA\Parameter(
@@ -140,11 +140,11 @@ Flight::route('PUT /tickets/@id', function ($id) {
         'data' => $service->modify_ticket($data, $id)
     ]);
 });
-/**
+/*
  * @OA\Delete(
  *     path="/tickets/{id}",
  *     summary="Delete a ticket by ID (Admin only)",
- *     security={{"JWT":{}}},
+ *     security={{"ApiKey": {}}},
  *     operationId="deleteTicket",
  *     tags={"Tickets"},
  *     @OA\Parameter(
