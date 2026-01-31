@@ -6,6 +6,10 @@ class AuthMiddleware {
 
   public function verifyToken($token){
     if(!$token) Flight::halt(401, "Missing authentication header");
+    
+    if (stripos($token, 'Bearer ') === 0) {
+        $token = trim(substr($token, 7));
+    }
 
     $decoded_token = JWT::decode($token, new Key(Config::JWT_SECRET(), 'HS256'));
     Flight::set('user', $decoded_token->user);

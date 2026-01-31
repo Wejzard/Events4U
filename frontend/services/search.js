@@ -8,8 +8,8 @@
       const id = event.event_id ?? event.id;
 
       const img = event.image
-        ? `frontend/assets/img/${event.image}`
-        : "frontend/assets/img/default.jpg";
+        ? `/frontend/assets/img/${event.image}`
+        : "/frontend/assets/img/default.jpg";
 
       const title = event.title ?? "Untitled event";
       const location = event.location ?? "-";

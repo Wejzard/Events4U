@@ -14,10 +14,31 @@ require_once __DIR__ . '/../services/UsersService.php';
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
- *             required={"new_password","old_password"},
- *             @OA\Property(property="email", type="string", example="user@example.com", description="Optional; ignored if JWT contains email"),
- *             @OA\Property(property="new_password", type="string", example="new_password123"),
- *             @OA\Property(property="old_password", type="string", example="old_password123")
+ *             required={"old_password","new_password","confirm_password"},
+ *             @OA\Property(
+ *                 property="old_password",
+ *                 type="string",
+ *                 example="old_password123",
+ *                 description="Your current password"
+ *             ),
+ *             @OA\Property(
+ *                 property="new_password",
+ *                 type="string",
+ *                 example="new_password123",
+ *                 description="Your new password (min 6 chars)"
+ *             ),
+ *             @OA\Property(
+ *                 property="confirm_password",
+ *                 type="string",
+ *                 example="new_password123",
+ *                 description="Must match new_password"
+ *             ),
+ *             @OA\Property(
+ *                 property="email",
+ *                 type="string",
+ *                 example="user@example.com",
+ *                 description="Optional; ignored. Identity is taken from JWT."
+ *             )
  *         )
  *     ),
  *     @OA\Response(
@@ -32,7 +53,7 @@ require_once __DIR__ . '/../services/UsersService.php';
  *         response=400,
  *         description="Bad request",
  *         @OA\JsonContent(
- *             @OA\Property(property="message", type="string", example="Missing email.")
+ *             @OA\Property(property="message", type="string", example="Old password is incorrect.")
  *         )
  *     ),
  *     @OA\Response(
@@ -69,28 +90,26 @@ Flight::route('POST /change-password', function () {
     Flight::halt(401, json_encode(["message" => "Invalid token: missing user id."]));
   }
 
-  // Prefer user_id (most secure)
   $data['user_id'] = $userId;
 
-  // If token includes email, force it too (extra safe + compatibility)
-  if (isset($user->email) && $user->email) {
-    $data['email'] = $user->email;
-  } else {
-    // If your existing service requires email and token doesn't have it,
-    // then require it in request (service should still verify ownership using user_id)
-    if (!isset($data['email']) || trim($data['email']) === '') {
-      Flight::halt(400, json_encode(["message" => "Missing email."]));
-    }
+  // ✅ Require fields (email is NOT required anymore)
+  if (!isset($data['old_password']) || trim((string)$data['old_password']) === '') {
+    Flight::halt(400, json_encode(["message" => "old_password is required."]));
+  }
+  if (!isset($data['new_password']) || trim((string)$data['new_password']) === '') {
+    Flight::halt(400, json_encode(["message" => "new_password is required."]));
+  }
+  if (!isset($data['confirm_password']) || trim((string)$data['confirm_password']) === '') {
+    Flight::halt(400, json_encode(["message" => "confirm_password is required."]));
   }
 
   $service = new UsersService();
+  $service->change_password($data);
 
   Flight::json([
-    'message' => 'Password updated successfully',
-    'data' => $service->change_password($data)
+    'message' => 'Password updated successfully'
   ]);
 });
-
 
 
 /*

@@ -1,8 +1,17 @@
+// frontend/services/logout.js
 $(document).ready(function () {
-  // Logout from modal or navbar
   $(document).on("click", ".logout-link", function (e) {
     e.preventDefault();
+
+    // 1) Clear token
     localStorage.removeItem("user_token");
-    window.location.href = "/HajrudinVejzovic/WebProject/index.html"; // or /index.html#login if using SPApp
+
+    // (optional) clear anything else you might store
+    // localStorage.removeItem("selected_event");
+    // localStorage.removeItem("user_profile");
+
+    // 2) Kill current history entry so Back doesn't return to a "protected" view
+    // Replace with your real entry URL (root is fine for production)
+    window.location.replace("/#login");
   });
 });

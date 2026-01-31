@@ -9,27 +9,27 @@ class Config
 {
     public static function DB_NAME()
     {
-        return 'ticket_system';
+        return 'NULL';
     }
     public static function DB_PORT()
     {
-        return  3306;
+        return  NULL;
     }
     public static function DB_USER()
     {
-        return 'root';
+        return NULL;
     }
     public static function DB_PASSWORD()
     {
-        return '';
+        return NULL;
     }
     public static function DB_HOST()
     {
-        return '127.0.0.1';
+        return NULL;
     }
     // JWT Secret Key Definition 
     public static function JWT_SECRET() {
-       return 'fb2f8b1e3e4c1f7d623dbc1a4f34c1d5acaf543b828ed7d8191d1e55a02eb636';
+       return NULL;
    }
 
 }

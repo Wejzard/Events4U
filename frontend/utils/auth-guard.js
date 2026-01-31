@@ -1,5 +1,6 @@
 // frontend/utils/auth-guard.js
 (function () {
+
   function parseJwt(token) {
     if (!token) return null;
     try {
@@ -14,20 +15,44 @@
     const payload = parseJwt(token);
     if (!payload) return false;
     if (payload.exp && Date.now() / 1000 > payload.exp) return false;
-
-    // IMPORTANT: your backend might not include payload.user, so don't require it yet
     return true;
   }
 
-  // ✅ Only enforce auth on index.html (and /WebProject/)
-  const p = window.location.pathname.toLowerCase();
-  const onIndex = p.endsWith("/webproject/") || p.endsWith("/webproject/index.html");
-
-  if (onIndex && !isTokenValid()) {
+  function redirectToLogin() {
     localStorage.removeItem("user_token");
-    // ✅ root-relative so it never becomes frontend/views/frontend/views/...
-    window.location.replace("/HajrudinVejzovic/WebProject/frontend/views/login.html");
+
+    // ✅ Use replace so Back button can’t revive a protected page
+    // If you keep login as a standalone html page, keep this line:
+    window.location.replace("/frontend/views/login.html");
+
+    // If later you move login into SPApp (#login), switch to:
+    // window.location.replace("/#login");
   }
 
+  // ✅ PRODUCTION-SAFE: guard root entry
+  function guardRootEntry() {
+    const path = window.location.pathname.toLowerCase();
+    const isRoot = path === "/" || path.endsWith("/index.html");
+
+    if (isRoot && !isTokenValid()) {
+      redirectToLogin();
+    }
+  }
+
+  // ✅ Run on initial load
+  guardRootEntry();
+
+  // ✅ Run when page is restored from cache (Back/Forward button)
+  window.addEventListener("pageshow", function () {
+    guardRootEntry();
+  });
+
+  // ✅ Also run on hash navigation (SPApp changes views via #main, #profile, etc.)
+  window.addEventListener("hashchange", function () {
+    guardRootEntry();
+  });
+
   window.AuthGuard = { isTokenValid, parseJwt };
+
 })();
+

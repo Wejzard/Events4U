@@ -1,38 +1,45 @@
 // frontend/services/event-details.js
-
 (function () {
+  // Wait until the event view DOM exists, but:
+  // - only while we're on #event
+  // - stop silently if user navigates away
+  // - no console spam
   function renderWhenDomReady(cb) {
-    // SPApp loads views async, so wait until event.html elements exist
-    const maxTries = 30; // 30 * 100ms = 3 seconds
-    let tries = 0;
+    const maxFrames = 180; // ~3 seconds at 60fps
+    let frames = 0;
 
-    const timer = setInterval(() => {
-      tries++;
+    function tick() {
+      // If user navigated away, stop (no error)
+      if (window.location.hash !== "#event") return;
+
+      frames++;
 
       if ($("#eventTitle").length > 0) {
-        clearInterval(timer);
         cb();
+        return;
       }
 
-      if (tries >= maxTries) {
-        clearInterval(timer);
-        console.error("Event details DOM not found (#eventTitle missing). Check event.html IDs.");
+      if (frames >= maxFrames) {
+        // Still on #event but DOM not there -> warn once (not error)
+        console.warn("Event details DOM not ready yet (#eventTitle missing). Check event.html IDs.");
+        return;
       }
-    }, 100);
+
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
   }
 
   function setAvailabilityUI(e) {
-    // Requires event.html to have:
-    // #eventAvailability, #reserveBtn, #buyBtn
     const $avail = $("#eventAvailability");
     const $reserve = $("#reserveBtn");
     const $buy = $("#buyBtn");
 
-    if (!$avail.length) return; // safety if you didn't add it yet
+    if (!$avail.length) return;
 
     const limit = parseInt(e?.ticket_limit ?? 0, 10);
 
-    // If not set or 0 => unlimited
     if (!limit || limit <= 0) {
       $avail.text("Unlimited");
       if ($reserve.length) $reserve.prop("disabled", false);
@@ -40,7 +47,6 @@
       return;
     }
 
-    // If backend provides used_qty, show exact remaining
     const usedProvided = e?.used_qty !== undefined && e?.used_qty !== null;
     const used = usedProvided ? parseInt(e.used_qty, 10) : null;
 
@@ -57,24 +63,28 @@
         if ($buy.length) $buy.removeClass("disabled").removeAttr("aria-disabled");
       }
     } else {
-      // We know it's limited, but don't know remaining (still enforced on backend)
       $avail.text("Limited");
       if ($reserve.length) $reserve.prop("disabled", false);
       if ($buy.length) $buy.removeClass("disabled").removeAttr("aria-disabled");
     }
   }
 
-  function loadEventDetails() {
-    const eventId = localStorage.getItem("selected_event_id");
+  // Prevent duplicate loads firing too often (hashchange + document.ready)
+  let isLoading = false;
 
+  function loadEventDetails() {
     // Only act when we are on #event
     if (window.location.hash !== "#event") return;
 
+    const eventId = localStorage.getItem("selected_event_id");
     if (!eventId) {
-      // No toastr here to avoid blank box; just return to main
       window.location.hash = "#main";
       return;
     }
+
+    // Avoid overlapping calls if hashchange fires twice quickly
+    if (isLoading) return;
+    isLoading = true;
 
     renderWhenDomReady(() => {
       RestClient.get(
@@ -92,28 +102,24 @@
           $("#eventPrice").text(`${e.price ?? "-"} €`);
 
           if (e.image) {
-            $("#eventImage").attr("src", `frontend/assets/img/${e.image}`);
+            $("#eventImage").attr("src", `/frontend/assets/img/${e.image}`);
           } else {
-            $("#eventImage").attr("src", "frontend/assets/img/default.jpg");
+            $("#eventImage").attr("src", "/frontend/assets/img/default.jpg");
           }
 
-          // ✅ NEW: fetch availability so we can show SOLD OUT properly
+          // Fetch availability (unchanged behavior)
           RestClient.get(
             `/events/${eventId}/availability`,
             function (a) {
-              // Inject used_qty into the same event object,
-              // so your existing setAvailabilityUI(e) works unchanged.
               if (a && a.used_qty !== undefined && a.used_qty !== null) {
                 e.used_qty = a.used_qty;
               }
-              // (Optional) if you ever want remaining directly:
-              // e.remaining_qty = a.remaining_qty;
-
               setAvailabilityUI(e);
+              isLoading = false;
             },
             function () {
-              // If availability endpoint fails, fallback to old behavior
               setAvailabilityUI(e);
+              isLoading = false;
             }
           );
         },
@@ -121,20 +127,22 @@
           const msg = xhr.responseJSON?.message || "Failed to load event details.";
           if (window.toastr) toastr.error(msg);
           else console.error(msg);
+
+          isLoading = false;
           window.location.hash = "#main";
         }
       );
     });
   }
 
-  // Expose so we can call it directly from the click handler too
+  // Keep your API exactly the same
   window.EventDetails = {
     load: loadEventDetails,
   };
 
-  // Run when hash changes (SPApp navigation)
+  // Run on navigation changes
   window.addEventListener("hashchange", loadEventDetails);
 
-  // Also try once on initial load (if page opened directly on #event)
+  // Initial load (only does anything if hash is #event)
   $(document).ready(loadEventDetails);
 })();
